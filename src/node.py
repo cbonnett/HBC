@@ -38,13 +38,17 @@ class node():
         self.diff = funct(left.id,righ.id)
         
     def initData(self,dataInit):
-        self.data=dataInit
-        self.data.extend([dataInit])
+        #print type(dataInit)
+        if(len(self.data)==0):
+            self.data=dataInit
+        else:
+            self.data.extend([dataInit])
         
     def toString(self):
         print "-- Node With id {0} , and children {1}".format(self.id,[i.id for i in self.children])
         print "-- With data {0})".format(self.data)        
-
+        #for e in self.data:
+           #print e
 if __name__ == "__main__":
     t = node()
     t.populateNode(1,[3,2],"")

@@ -9,7 +9,7 @@ from tree import tree
 import numpy as np
 
 
-arbol = tree(np.arange(10),"")
+arbol = tree(np.arange(4),"")
 arbol.initTree()
 arbol.fit()
 
