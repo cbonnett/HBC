@@ -28,41 +28,17 @@ class node():
         pass
 
     def merge(self):
-<<<<<<< HEAD
-        self.left=self.children[0]
-        self.right=self.children[1]
-        self.data=self.left.data + self.right.data
-=======
-        print self.children
         self.left=self.children[0]
         self.right=self.children[1]
         self.data=self.left.data + self.right.data
         return self
->>>>>>> felipe
+
         
     def calcDiff(self,left,righ):
         self.diff = funct(left.id,righ.id)
         
     def initData(self,dataInit):
-<<<<<<< HEAD
         self.data=dataInit
-        
-if __name__ == "__main__":
-    
-    t = node()
-    t.populateNode(1,[3,2],"")
-    t.initData([1,2,3])
-
-    r = node()
-    r.populateNode(2,[0,2],"")
-    r.initData([1,1,1])
-
-    y=node()
-    y.populateNode(3,[t,r],"")
-    y.merge()
-    y.data
-    
-=======
         self.data.extend([dataInit])
         
     def toString(self):
@@ -83,4 +59,4 @@ if __name__ == "__main__":
     y.merge()
     print y.data
 
->>>>>>> felipe
+
