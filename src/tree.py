@@ -24,7 +24,7 @@ class tree():
         
     def initTree(self):
         [self.node1[i].populateNode(i,[],self.diffFunction)  for i,d  in enumerate(self.rawData)]
-        [self.node1[i].initData([d])  for i,d  in enumerate(self.rawData)]
+        [self.node1[i].initData(d)  for i,d  in enumerate(self.rawData)]
         self.activeNodes = [node.id for node in self.node1]
         print self.activeNodes
         
@@ -41,7 +41,9 @@ class tree():
 
         rkList=[]
         for duple in nodes:
-            rk = np.random.rand()
+
+            rk = np.random.rand() #to be transformed.
+            
             rkList.append(rk)
 
         cadidateIndex = list(nodes[rkList.index(np.max(rkList))]) 

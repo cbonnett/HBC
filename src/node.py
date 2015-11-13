@@ -23,6 +23,10 @@ class node():
         self.left=0
         self.right=0
         self.children=children
+        self.dk=0
+        self.pik=0
+        self.pH1=0
+        self.pTi=0
     
     def __init__(self):
         pass
@@ -44,6 +48,8 @@ class node():
         else:
             self.data.extend([dataInit])
         
+    def 
+    
     def toString(self):
         print "-- Node With id {0} , and children {1}".format(self.id,[i.id for i in self.children])
         print "-- With data {0})".format(self.data)        
