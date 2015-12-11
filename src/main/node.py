@@ -56,10 +56,10 @@ class node():
         fills the data variables of the object node.
         '''
         #print type(dataInit)
-        if(len(self.data)==0):
-            self.data=dataInit
-        else:
-            self.data.extend([dataInit])
+        #if(len(self.data)==0):
+        #    self.data=list(dataInit)
+        #else:
+        self.data.extend([dataInit])
         
     
     def toString(self):
@@ -74,11 +74,11 @@ class node():
 if __name__ == "__main__":
     t = node()
     t.populateNode(1,[],"")
-    t.initData([1])
+    t.initData(1)
     
     r = node()
     r.populateNode(2,[0,2],"")
-    r.initData([2,3,4])
+    r.initData(2)
     
     y=node()
     y.populateNode(3,[t,r],"")
