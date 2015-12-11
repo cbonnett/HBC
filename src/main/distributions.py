@@ -12,6 +12,7 @@ from scipy.stats import chi2 , multivariate_normal
 class likelihood():
     def __init__(self,data):
         self.data=data
+        
     def calculate(self,m,S):
         dataLikelyHood=0
         for i in self.data:
@@ -55,7 +56,7 @@ if __name__ == "__main__":
     var_mean = np.mean(var_,axis=0)
     mean_mean =np.mean(mean_,axis=0)
     l=likelihood([[0,0],[0,0]]).calculate(mean_mean,var_mean)
-    print mean_mean,var_mean , np.exp(l)
+    print mean_mean,var_mean 
     #print  mean_samples #var_samples
-    #print 'mean: {0}'.format(np.mean(mean_samples, axis=0))
+    #print 'mean: {0}'.format(np.mean(mean_, axis=0))
     # Should be close to the identity matrix, but usually is close to I*5

@@ -9,6 +9,7 @@ Created on Sat Nov  7 16:38:37 2015
 import numpy as np
 from node import node
 from itertools import permutations
+import distributions as dist
 
 class tree():
     
@@ -20,6 +21,7 @@ class tree():
         self.nodes=[]
         self.activeNodes=[]
         self.node1=[node() for i,d in enumerate(rawData)]
+        self.alpha =0.1
         print self.node1
         
     def initTree(self):
@@ -31,22 +33,59 @@ class tree():
     def createPerm(self,nodesToMerge):
         return permutations(nodesToMerge,2)
     
-
+        
+    def probUnderH1(self,datos):
+        #d = posibleNodesMerge[0].data     .extend(posibleNodesMerge[1].data)
+        
+        aux = dist.likelihood(datos)
+        return aux.calculate([0.0],[1.0])
+        
     #def mergedNodes(self):
         #nodes = list(self.createPerm(self.activeNodes))
-
+  
+    def fact(self,n):
+        if(n==1):
+            return 1
+        else:
+            return n*self.fact(n-1)
+   
     def mergedNodes(self,node):
         nodes = list(self.createPerm(self.activeNodes))
         print "- 1 - Number of Nodes that could be merge : {0} ".format(len(self.activeNodes))
 
         rkList=[]
+        allOtherVals=[]
+        
         for duple in nodes:
-
-            rk = np.random.rand() #to be transformed.
+             
+            #print self.node1[duple[0]].data 
+           
+            #mergeCandidate=[self.node1[duple[0]],self.node1[duple[1]]]
+            left =  self.node1[duple[0]]
+            right = self.node1[duple[1]]
+            datos = left.data + right.data 
+            #print  mergeCandidate[0].data  , mergeCandidate[1].data           
             
+            p1 = self.probUnderH1(datos) 
+            alphaGamma = self.alpha*self.fact(len(datos)-1)
+           
+            
+            dK = alphaGamma + left.dk*right.dk
+            piK = alphaGamma/dK
+           
+            marginal = p1*piK + left.pTi*right.pTi*(left.dk*right.dk)/dK
+           
+            #rk = np.random.rand() #to be transformed.
+                        
+            rk = piK*p1/marginal
+           
+            allOtherVals.append((dK,piK,p1,marginal))
+                 
             rkList.append(rk)
 
-        cadidateIndex = list(nodes[rkList.index(np.max(rkList))]) 
+        maxIndex = rkList.index(np.max(rkList))       
+        cadidateIndex = list(nodes[maxIndex]) 
+        
         print "- 2 - Nodes to merge {0}".format(cadidateIndex)
         mergeCandidate=[self.node1[cadidateIndex[0]],self.node1[cadidateIndex[1]]]
         
@@ -54,7 +93,7 @@ class tree():
         nodeMergeId=max([i.id for i in self.node1])+1
         print "- 3 - New Node Crated with id {0}".format(nodeMergeId)
         nodeMerge.populateNode(nodeMergeId,mergeCandidate,self.diffFunction)
-        
+        nodeMerge.repopulateVals(allOtherVals[maxIndex])
         
         [self.activeNodes.remove(elem.id) for elem in nodeMerge.children]
         self.activeNodes.append(nodeMerge.id)        
@@ -70,8 +109,8 @@ class tree():
                 print "Loop number {0} : ___________________________________".format(count)                
                 self.mergedNodes(node)
                 
-    
 
+        
 if __name__ == "__main__":
 
     arbol = tree(np.arange(10),"")
