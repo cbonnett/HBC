@@ -77,6 +77,7 @@ class node():
         '''
         print "-- Node With id {0} , and children {1}".format(self.id,[i.id for i in self.children])
         print "-- With data {0})".format(self.data) 
+        
         #for e in self.data:
            #print e
         
