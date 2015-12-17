@@ -11,7 +11,9 @@ lev2 =  lev1[0:lev1.rfind("/")]
 topDir=lev2 
 if not topDir in sys.path:
     sys.path.append(topDir)
+
 from  src.main import distributions,node,tree
+
 import numpy as np
 import unittest
 
