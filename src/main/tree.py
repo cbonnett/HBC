@@ -38,7 +38,7 @@ class tree():
         #d = posibleNodesMerge[0].data     .extend(posibleNodesMerge[1].data)
         
         aux = dist.likelihood(datos)
-        return aux.calculate([0.0],[1.0])
+        return aux.calculate([2.0],[1.0])
         
     #def mergedNodes(self):
         #nodes = list(self.createPerm(self.activeNodes))
@@ -66,7 +66,7 @@ class tree():
             datos = left.data + right.data 
             #print  mergeCandidate[0].data  , mergeCandidate[1].data           
             
-            p1 = self.probUnderH1(datos) 
+            p1 = np.exp(self.probUnderH1(datos)) 
             alphaGamma = self.alpha*self.fact(len(datos)-1)
            
             
@@ -78,6 +78,10 @@ class tree():
             #rk = np.random.rand() #to be transformed.
                         
             rk = piK*p1/marginal
+            
+            print "------------------"
+            print "rk:{6},p1:{0},alphaGamma:{1},dK:{2},marginal:{3},idleft:{4},idright:{5}".format(p1,alphaGamma,dK,marginal,left.id,right.id,rk)
+            print "left.pTi:{0},right.pTi:{1},rest:{2},piK:{3}".format(left.pTi,right.pTi,(left.dk*right.dk)/dK,piK)
            
             allOtherVals.append((dK,piK,p1,marginal))
                  

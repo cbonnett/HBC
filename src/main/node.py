@@ -67,7 +67,7 @@ class node():
         #else:
 
         self.data.extend([dataInit])
-        self.pTi = np.exp(dist.likelihood(self.data).calculate([0.0],[1.0]))
+        self.pTi = np.exp(dist.likelihood(self.data).calculate([2.0],[1.0]))
         self.pH1 = self.pTi 
      
     
@@ -75,9 +75,11 @@ class node():
         '''
         Personalize the printing of the object node.
         '''
+        '''
         print "-- Node With id {0} , and children {1}".format(self.id,[i.id for i in self.children])
         print "-- With data {0})".format(self.data) 
-        
+        print "-- dk:{0} , pik:{1},pH1:{2},pTi:{3}".format(self.dk,self.pik,self.pH1,self.pTi)     
+        '''        
         #for e in self.data:
            #print e
         

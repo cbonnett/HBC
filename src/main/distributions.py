@@ -17,6 +17,7 @@ class likelihood():
         dataLikelyHood=0
         for i in self.data:
             #Many of the prob calculated here will be redundant when used upper levels of the tree.
+            print "multivaritate normal {0}".format(np.log(multivariate_normal.pdf(i, mean=m, cov=S)))
             dataLikelyHood += np.log(multivariate_normal.pdf(i, mean=m, cov=S))
         return dataLikelyHood           
 
